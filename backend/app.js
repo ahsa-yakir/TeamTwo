@@ -24,17 +24,17 @@ app.post("/api/posts", (req, res, next) => {
   Post.query(
   'INSERT INTO posts(title, content) VALUES($1, $2) RETURNING *',
   [req.body.title, req.body.content],
-    (err,res) => {
+    (err,createdPost) => {
       if (err) {
         console.log(err.stack)
       } else {
-        console.log(res.rows[0])
+        res.status(201).json({
+          message: "Post Created!",
+          postId: createdPost.rows[0].id
+        })
       }
     }
   )
-  res.status(201).json({
-    message: 'Post added successfully'
-  });
 });
 
 app.get('/api/posts', (req, res, next) => {
@@ -51,6 +51,22 @@ app.get('/api/posts', (req, res, next) => {
       }
     }
   )
+});
+
+app.delete("/api/posts/:id", (req, res, next) => {
+  Post.query(
+    'DELETE FROM posts WHERE id = $1',
+    [req.params.id],
+    (err,result) => {
+      if (err) {
+        console.log(err.stack)
+      } else {
+        console.log(result)
+        res.status(200).json({message: "Post deleted"})
+      }
+    }
+  )
+  
 });
 
 module.exports = app;
