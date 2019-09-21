@@ -1,5 +1,6 @@
 const express = require("express");
 const bodyParser = require("body-parser")
+const Post = require("./models/database")
 
 const app = express();
 
@@ -20,8 +21,17 @@ app.use((req, res, next) => {
 });
 
 app.post("/api/posts", (req, res, next) => {
-  const post = req.body;
-  console.log(post);
+  Post.query(
+  'INSERT INTO posts(title, content) VALUES($1, $2) RETURNING *',
+  [req.body.title, req.body.content],
+    (err,res) => {
+      if (err) {
+        console.log(err.stack)
+      } else {
+        console.log(res.rows[0])
+      }
+    }
+  )
   res.status(201).json({
     message: 'Post added successfully'
   });
