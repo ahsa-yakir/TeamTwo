@@ -1,0 +1,7 @@
+{
+  "username": "teamTwo",
+  "password": "Welcome123!",
+  "database": "teamTwoDB",
+  "host": "database-1.cm5eeglseqxy.us-east-1.rds.amazonaws.com",
+  "dialect": "postgres"
+}
