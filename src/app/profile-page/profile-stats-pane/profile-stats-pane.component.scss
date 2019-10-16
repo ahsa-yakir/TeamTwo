@@ -1,0 +1,24 @@
+mat-card {
+    display:flex;
+    flex-wrap: wrap;
+}
+
+@function getDisplayNum($target) {
+    $vw-context: (1000*.01) * 1px;
+    $val: ($target/$vw-context) * 1vw;
+    @if $vw-context == handhelds {
+        @return 2
+    }
+    @else if $vw-context == medium-screens {
+        @return 4
+    }
+    @else if $vw-context == wide-screens {
+        @return 6
+    }
+    @return 5
+}
+
+
+.stat-display-div {
+    flex: 1 0 (105% / (getDisplayNum(100vw) + 1));
+}
