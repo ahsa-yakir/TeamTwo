@@ -43,7 +43,11 @@ export class AuthService {
               }
           });
   }
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient) {}
 
+  logout() {
+        this.token = null;
+        this.isAuthenticated = false;
+        this.authStatusListener.next(false);
   }
 }
