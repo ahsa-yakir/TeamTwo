@@ -1,0 +1,42 @@
+mat-card {
+  display: flex;
+  flex-wrap: nowrap;
+  height: 250px;
+  max-height: 250px;
+}
+
+$panel-margin: 0.5rem;
+
+.mat-card-content > :first-child, .mat-card > :first-child, .mat-card-content > :last-child:not(.mat-card-footer), .mat-card > :last-child:not(.mat-card-footer) {
+  margin: $panel-margin;
+}
+
+.player-image {
+  flex: 2;
+  margin: $panel-margin;
+  max-width: 100%;
+  max-height: 100%;
+
+  > img {
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: 30px;
+  }
+}
+
+.player-info {
+  flex: 5;
+  margin: $panel-margin;
+  max-width: 100%;
+  max-height: 100%;
+
+  > h1, h3 {
+    white-space: nowrap;
+    margin-bottom: 0;
+  }
+
+  > h1 {
+    font-size: 50px;
+    font-style: normal;
+  }
+}

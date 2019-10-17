@@ -1,4 +1,4 @@
-mat-card {
+mat-card-content {
     display:flex;
     flex-wrap: wrap;
 }
@@ -15,10 +15,11 @@ mat-card {
     @else if $vw-context == wide-screens {
         @return 6
     }
-    @return 5
+    @return 4
 }
 
 
 .stat-display-div {
     flex: 1 0 (105% / (getDisplayNum(100vw) + 1));
 }
+

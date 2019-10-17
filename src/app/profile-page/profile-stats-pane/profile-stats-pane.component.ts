@@ -11,40 +11,31 @@ export class ProfileStatsPaneComponent implements OnInit {
     // noinspection JSMismatchedCollectionQueryUpdate
     private fakeData: {}[] = [
         {
-            title: 'goals',
-            value: 10
+            title: 'Games',
+            value: 79
         },
         {
-            title: 'saves',
-            value: 420
+            title: 'Goals per game',
+            value: 3.2
         },
         {
-            title: 'Favorite Candy',
-            value: 'Deez'
+            title: 'Assists per game',
+            value: 1.23
+        }
+    ];
+
+    private fakeAcademicData: {}[] = [
+        {
+            title: 'GPA',
+            value: '3.99 / 4'
         },
         {
-            title: 'goals',
-            value: 10
+            title: 'AP / Honors Courses Taken',
+            value: '32 / 36'
         },
         {
-            title: 'saves',
-            value: 420
-        },
-        {
-            title: 'Favorite Candy',
-            value: 'Deez'
-        },
-        {
-            title: 'goals',
-            value: 10
-        },
-        {
-            title: 'saves',
-            value: 420
-        },
-        {
-            title: 'Favorite Candy',
-            value: 'Deez'
+            title: 'School Rank',
+            value: '1 / 600'
         }
     ];
 
