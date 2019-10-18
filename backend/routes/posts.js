@@ -1,9 +1,8 @@
 const express = require("express");
-const multer = require("multer");
-
-const Post = require("../models/database")
-
+const Post = require("../models/database");
 const router = express.Router();
+const multer = require("multer");
+const checkAuth = require("../middleware/check-auth");
 
 const MIME_TYPE_MAP = {
   'image/png': 'png',
@@ -27,14 +26,14 @@ const storage = multer.diskStorage({
   }
 });
 
-router.post("", multer({storage: storage}).single("image"), (req, res, next) => {
+router.post("", multer({storage: storage}).single("image"), checkAuth, (req, res, next) => {
   const url = req.protocol + '://' + req.get("host");
   Post.query(
   'INSERT INTO posts(title, content, imagepath) VALUES($1, $2, $3) RETURNING *',
   [req.body.title, req.body.content, url + "/images/" + req.file.filename],
     (err,createdPost) => {
       if (err) {
-        console.log(err.stack)
+        console.log(err.stack);
       } else {
         res.status(201).json({
           message: "Post Created!",
@@ -46,8 +45,8 @@ router.post("", multer({storage: storage}).single("image"), (req, res, next) => 
           }
         })
       }
-    }
-  )
+    },
+  );
 });
 
 //Update Post
@@ -102,26 +101,26 @@ router.get('/:id', (req,res,next) => {
           title: results.rows[0].title,
           content: results.rows[0].content,
           imagePath: results.rows[0].imagepath
-        })
+        });
       }
-    }
-    
-  )
-})
+    },
 
-router.delete("/:id", (req, res, next) => {
+  );
+});
+
+router.delete("/:id", checkAuth, (req, res, next) => {
   Post.query(
-    'DELETE FROM posts WHERE id = $1',
+    "DELETE FROM posts WHERE id = $1",
     [req.params.id],
-    (err,result) => {
+    (err, result) => {
       if (err) {
-        console.log(err.stack)
+        console.log(err.stack);
       } else {
-        console.log(result)
-        res.status(200).json({message: "Post deleted"})
+        console.log(result);
+        res.status(200).json({message: "Post deleted"});
       }
-    }
-  )
+    },
+  );
 });
 
 module.exports = router;
