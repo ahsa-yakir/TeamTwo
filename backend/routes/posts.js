@@ -1,30 +1,65 @@
 const express = require("express");
+const multer = require("multer");
 
 const Post = require("../models/database")
 
 const router = express.Router();
 
-router.post("", (req, res, next) => {
+const MIME_TYPE_MAP = {
+  'image/png': 'png',
+  'image/jpeg': 'jpg',
+  'image/jpg': 'jpg'
+};
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    const isValid = MIME_TYPE_MAP[file.mimetype];
+    let error = new Error("Invalid mime type");
+    if (isValid) {
+      error = null;
+    }
+    cb(error, "backend/images");
+  },
+  filename: (req,file, cb) => {
+    const name = file.originalname.toLowerCase().split(' ').join('-');
+    const ext = MIME_TYPE_MAP[file.mimetype];
+    cb(null, name + '-' + Date.now() + '.' + ext);
+  }
+});
+
+router.post("", multer({storage: storage}).single("image"), (req, res, next) => {
+  const url = req.protocol + '://' + req.get("host");
   Post.query(
-  'INSERT INTO posts(title, content) VALUES($1, $2) RETURNING *',
-  [req.body.title, req.body.content],
+  'INSERT INTO posts(title, content, imagepath) VALUES($1, $2, $3) RETURNING *',
+  [req.body.title, req.body.content, url + "/images/" + req.file.filename],
     (err,createdPost) => {
       if (err) {
         console.log(err.stack)
       } else {
         res.status(201).json({
           message: "Post Created!",
-          postId: createdPost.rows[0].id
+          post: {
+            id: createdPost.rows[0].id,
+            title: createdPost.rows[0].title,
+            content: createdPost.rows[0].content,
+            imagePath: createdPost.rows[0].imagepath
+          }
         })
       }
     }
   )
 });
 
-router.put("/:id", (req, res, next) =>  {
+//Update Post
+router.put("/:id", multer({storage: storage}).single("image"), (req, res, next) =>  {
+  let imagePath = req.body.imagepath;
+  if (req.file) {
+    const url = req.protocol + '://' + req.get("host");
+    imagePath = url + "/images/" + req.file.filename
+  }
   Post.query(
-    'UPDATE posts SET title = $1, content = $2 WHERE id = $3',
-    [req.body.title, req.body.content, req.body.id],
+    'UPDATE posts SET title = $1, content = $2, imagepath = $4 WHERE id = $3',
+    [req.body.title, req.body.content, req.body.id, imagePath],
       (err,results) => {
         if (err) {
           console.log(err.stack)
@@ -65,7 +100,8 @@ router.get('/:id', (req,res,next) => {
         res.status(200).json({
           id: results.rows[0].id,
           title: results.rows[0].title,
-          content: results.rows[0].content
+          content: results.rows[0].content,
+          imagePath: results.rows[0].imagepath
         })
       }
     }
