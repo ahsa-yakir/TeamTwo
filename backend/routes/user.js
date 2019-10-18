@@ -29,7 +29,7 @@ router.post("/login", (req, res, next) => {
     .then(user => {
       if (!user) {
         return res.status(401).json({
-          message: "Auth failed"
+          message: "Auth failed",
         });
       }
       grabbedUser = user;
@@ -50,6 +50,7 @@ router.post("/login", (req, res, next) => {
           );
           res.status(200).json({
             token: token,
+            expiresIn: 3600,
           });
         })
         .catch(err => { // if error was thrown return 401 status
