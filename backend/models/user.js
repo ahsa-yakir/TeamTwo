@@ -1,31 +1,33 @@
 const Sequelize = require("sequelize");
 const config = require("../sqlizeConfig");
 let sequelize = new Sequelize(config.database, config.username, config.password, {
-    host: config.host,
-    dialect: config.dialect,
-  });
+  host: config.host,
+  dialect: config.dialect,
+});
+/* jshint indent: 2 */
 
-let User = sequelize.define("user", {
-    userId: {
-      type: Sequelize.INTEGER,
+module.exports = function(sequelize, DataTypes) {
+  return sequelize.define('user', {
+    user_id: {
+      type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true,
-      autoIncrement: true,
-      field: "user_id",
+      autoIncrement: true
     },
     email: {
-      type: Sequelize.STRING,
-      allowNull: false,
-      field: "email",
+      type: DataTypes.STRING,
+      allowNull: false
     },
     password: {
-      type: Sequelize.STRING,
-      allowNull: false,
-      field: "password",
+      type: DataTypes.STRING,
+      allowNull: false
     },
+    created_on: {
+      type: DataTypes.DATEONLY,
+      allowNull: false,
+      defaultValue: sequelize.literal('CURRENT_DATE')
+    }
   }, {
-    tableName: "user",
-    timestamps: false,
+    tableName: 'user'
   });
-
-module.exports = User;
+};
