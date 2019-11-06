@@ -20,6 +20,11 @@ import { PostListComponent } from './posts/post-list/post-list.component';
 import { LoginComponent } from './auth/login/login.component';
 import {SignupComponent} from './auth/signup/signup.component';
 import {AuthInterceptor} from './auth/auth-interceptor';
+import { ProfilePageComponent } from './profile-page/profile-page.component';
+import { ProfileStatsPaneComponent } from './profile-page/profile-stats-pane/profile-stats-pane.component';
+import { ProfileVideoCarouselComponent } from './profile-page/profile-video-carousel/profile-video-carousel.component';
+import { ProfileHeaderComponent } from './profile-page/profile-header/profile-header.component';
+import { StatDisplayComponent } from './profile-page/profile-stats-pane/stat-display/stat-display.component';
 
 
 @NgModule({
@@ -29,7 +34,12 @@ import {AuthInterceptor} from './auth/auth-interceptor';
     HeaderComponent,
     PostListComponent,
     LoginComponent,
-    SignupComponent
+    SignupComponent,
+    ProfilePageComponent,
+    ProfileStatsPaneComponent,
+    ProfileVideoCarouselComponent,
+    ProfileHeaderComponent,
+    StatDisplayComponent
   ],
   imports: [
     BrowserModule,
