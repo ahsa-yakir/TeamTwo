@@ -19,6 +19,7 @@ import { HeaderComponent } from './header/header.component';
 import { PostListComponent } from './posts/post-list/post-list.component';
 import { LoginComponent } from './auth/login/login.component';
 import {SignupComponent} from './auth/signup/signup.component';
+import {AuthInterceptor} from './auth/auth-interceptor';
 import { ProfilePageComponent } from './profile-page/profile-page.component';
 import { ProfileStatsPaneComponent } from './profile-page/profile-stats-pane/profile-stats-pane.component';
 import { ProfileVideoCarouselComponent } from './profile-page/profile-video-carousel/profile-video-carousel.component';
@@ -54,7 +55,7 @@ import { StatDisplayComponent } from './profile-page/profile-stats-pane/stat-dis
     MatProgressSpinnerModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
