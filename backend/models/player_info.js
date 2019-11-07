@@ -28,12 +28,20 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING,
       allowNull: true
     },
-    location: {
+    profile_picture: {
+      type: "BYTEA",
+      allowNull: true
+    },
+    city: {
       type: DataTypes.STRING,
       allowNull: true
     },
-    profile_picture: {
-      type: "BYTEA",
+    state: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+    country: {
+      type: DataTypes.STRING,
       allowNull: true
     }
   }, {

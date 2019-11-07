@@ -12,7 +12,19 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING,
       allowNull: true
     },
-    location: {
+    city: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+    type: {
+      type: DataTypes.ENUM("High School","Youth Club Team","Professional Team","College/University"),
+      allowNull: true
+    },
+    state: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+    country: {
       type: DataTypes.STRING,
       allowNull: true
     }
