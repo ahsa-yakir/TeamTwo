@@ -1,8 +1,10 @@
 const express = require('express');
-const Post = require('../database');
+//const Post = require('../database');
 const router = express.Router();
 const multer = require('multer');
 const checkAuth = require('../middleware/check-auth');
+const models = require('../models');
+const Post = models.posts;
 
 const MIME_TYPE_MAP = {
     'image/png': 'png',
@@ -35,6 +37,28 @@ router.post(
     checkAuth,
     (req, res, next) => {
         const url = req.protocol + '://' + req.get('host');
+        Post.create({
+            title: req.body.title,
+            content: req.body.content,
+            imagepath: url + '/images/' + req.file.filename,
+        })
+            .then(results => {
+                res.status(201).json({
+                    message: 'Post Created!',
+                    post: {
+                        id: results[0].dataValues.id,
+                        title: results[0].dataValues.title,
+                        content: results[0].dataValues.content,
+                        imagePath: results[0].dataValues.imagepath,
+                    },
+                });
+            })
+            .catch(err => {
+                res.status(500).json({
+                    error: err,
+                });
+            });
+        /*
         Post.query(
             'INSERT INTO posts(title, content, imagepath) VALUES($1, $2, $3) RETURNING *',
             [
@@ -58,6 +82,7 @@ router.post(
                 }
             }
         );
+        */
     }
 );
 
@@ -71,6 +96,29 @@ router.put(
             const url = req.protocol + '://' + req.get('host');
             imagePath = url + '/images/' + req.file.filename;
         }
+        Post.update(
+            {
+                title: req.body.title,
+                content: req.body.content,
+                imagepath: imagePath,
+            },
+            {
+                where: {
+                    id: req.body.id,
+                },
+            }
+        ).then(result => {
+            res.status(200)
+                .json({
+                    message: 'Post updated successfully',
+                })
+                .catch(err => {
+                    res.status(500).json({
+                        error: err,
+                    });
+                });
+        });
+        /*
         Post.query(
             'UPDATE posts SET title = $1, content = $2, imagepath = $4 WHERE id = $3',
             [req.body.title, req.body.content, req.body.id, imagePath],
@@ -84,9 +132,11 @@ router.put(
                 }
             }
         );
+        */
     }
 );
 
+/*
 router.get('', (req, res, next) => {
     Post.query('SELECT * FROM posts', (err, results) => {
         if (err) {
@@ -98,9 +148,46 @@ router.get('', (req, res, next) => {
             });
         }
     });
+}); 
+*/
+
+router.get('', (req, res, next) => {
+    Post.findAll({
+        attributes: ['id', 'title', 'content', 'imagepath'],
+    })
+        .then(result => {
+            res.status(201).json({
+                message: 'Posts fetched successfully',
+                posts: result,
+            });
+        })
+        .catch(err => {
+            res.status(500).json({
+                error: err,
+            });
+        });
 });
 
 router.get('/:id', (req, res, next) => {
+    Post.findAll({
+        where: {
+            id: req.params.id,
+        },
+    })
+        .then(results => {
+            res.status(200).json({
+                id: results[0].dataValues.id,
+                title: results[0].dataValues.title,
+                content: results[0].dataValues.content,
+                imagePath: results[0].dataValues.imagepath,
+            });
+        })
+        .catch(err => {
+            res.status(500).json({
+                error: err,
+            });
+        });
+    /*
     Post.query(
         'SELECT * FROM posts WHERE id = $1',
         [req.params.id],
@@ -118,9 +205,25 @@ router.get('/:id', (req, res, next) => {
             }
         }
     );
+    */
 });
 
 router.delete('/:id', checkAuth, (req, res, next) => {
+    Post.destroy({
+        where: {
+            id: req.params.id,
+        },
+    })
+        .then(results => {
+            console.log(result);
+            res.status(200).json({ message: 'Post deleted' });
+        })
+        .catch(err => {
+            res.status(500).json({
+                error: err,
+            });
+        });
+    /*
     Post.query(
         'DELETE FROM posts WHERE id = $1',
         [req.params.id],
@@ -133,6 +236,7 @@ router.delete('/:id', checkAuth, (req, res, next) => {
             }
         }
     );
+    */
 });
 
 module.exports = router;
