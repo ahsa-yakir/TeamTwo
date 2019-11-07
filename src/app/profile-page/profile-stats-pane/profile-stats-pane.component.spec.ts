@@ -1,16 +1,15 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { ProfileStatsPaneComponent } from './profile-stats-pane.component';
+import { ProfileStatsPaneComponent } from "./profile-stats-pane.component";
 
-describe('ProfileStatsPaneComponent', () => {
+describe("ProfileStatsPaneComponent", () => {
   let component: ProfileStatsPaneComponent;
   let fixture: ComponentFixture<ProfileStatsPaneComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ProfileStatsPaneComponent ]
-    })
-    .compileComponents();
+      declarations: [ProfileStatsPaneComponent]
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -19,7 +18,7 @@ describe('ProfileStatsPaneComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

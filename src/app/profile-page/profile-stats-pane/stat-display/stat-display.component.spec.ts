@@ -1,16 +1,15 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { StatDisplayComponent } from './stat-display.component';
+import { StatDisplayComponent } from "./stat-display.component";
 
-describe('StatDisplayComponent', () => {
+describe("StatDisplayComponent", () => {
   let component: StatDisplayComponent;
   let fixture: ComponentFixture<StatDisplayComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ StatDisplayComponent ]
-    })
-    .compileComponents();
+      declarations: [StatDisplayComponent]
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -19,7 +18,7 @@ describe('StatDisplayComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

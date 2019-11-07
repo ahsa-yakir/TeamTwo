@@ -1,16 +1,15 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { ProfileVideoCarouselComponent } from './profile-video-carousel.component';
+import { ProfileVideoCarouselComponent } from "./profile-video-carousel.component";
 
-describe('ProfileVideoCarouselComponent', () => {
+describe("ProfileVideoCarouselComponent", () => {
   let component: ProfileVideoCarouselComponent;
   let fixture: ComponentFixture<ProfileVideoCarouselComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ProfileVideoCarouselComponent ]
-    })
-    .compileComponents();
+      declarations: [ProfileVideoCarouselComponent]
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -19,7 +18,7 @@ describe('ProfileVideoCarouselComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

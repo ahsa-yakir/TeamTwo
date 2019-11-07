@@ -1,16 +1,15 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { ProfileHeaderComponent } from './profile-header.component';
+import { ProfileHeaderComponent } from "./profile-header.component";
 
-describe('ProfileHeaderComponent', () => {
+describe("ProfileHeaderComponent", () => {
   let component: ProfileHeaderComponent;
   let fixture: ComponentFixture<ProfileHeaderComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ProfileHeaderComponent ]
-    })
-    .compileComponents();
+      declarations: [ProfileHeaderComponent]
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -19,7 +18,7 @@ describe('ProfileHeaderComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });
