@@ -1,9 +1,3 @@
-const Sequelize = require("sequelize");
-const config = require("../sqlizeConfig");
-let sequelize = new Sequelize(config.database, config.username, config.password, {
-  host: config.host,
-  dialect: config.dialect,
-});
 /* jshint indent: 2 */
 
 module.exports = function(sequelize, DataTypes) {
