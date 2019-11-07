@@ -42,20 +42,20 @@ router.post(
             content: req.body.content,
             imagepath: url + '/images/' + req.file.filename,
         })
+            .catch(err => {
+                res.status(500).json({
+                    error: err,
+                });
+            })
             .then(results => {
                 res.status(201).json({
                     message: 'Post Created!',
                     post: {
-                        id: results[0].dataValues.id,
-                        title: results[0].dataValues.title,
-                        content: results[0].dataValues.content,
-                        imagePath: results[0].dataValues.imagepath,
+                        id: results.dataValues.id,
+                        title: results.dataValues.title,
+                        content: results.dataValues.content,
+                        imagePath: results.dataValues.imagepath,
                     },
-                });
-            })
-            .catch(err => {
-                res.status(500).json({
-                    error: err,
                 });
             });
         /*
@@ -107,17 +107,17 @@ router.put(
                     id: req.body.id,
                 },
             }
-        ).then(result => {
-            res.status(200)
-                .json({
-                    message: 'Post updated successfully',
-                })
-                .catch(err => {
-                    res.status(500).json({
-                        error: err,
-                    });
+        )
+            .catch(err => {
+                res.status(500).json({
+                    error: err,
                 });
-        });
+            })
+            .then(result => {
+                res.status(200).json({
+                    message: 'Post updated successfully',
+                });
+            });
         /*
         Post.query(
             'UPDATE posts SET title = $1, content = $2, imagepath = $4 WHERE id = $3',
@@ -155,15 +155,15 @@ router.get('', (req, res, next) => {
     Post.findAll({
         attributes: ['id', 'title', 'content', 'imagepath'],
     })
+        .catch(err => {
+            res.status(500).json({
+                error: err,
+            });
+        })
         .then(result => {
             res.status(201).json({
                 message: 'Posts fetched successfully',
                 posts: result,
-            });
-        })
-        .catch(err => {
-            res.status(500).json({
-                error: err,
             });
         });
 });
@@ -174,17 +174,17 @@ router.get('/:id', (req, res, next) => {
             id: req.params.id,
         },
     })
+        .catch(err => {
+            res.status(500).json({
+                error: err,
+            });
+        })
         .then(results => {
             res.status(200).json({
                 id: results[0].dataValues.id,
                 title: results[0].dataValues.title,
                 content: results[0].dataValues.content,
                 imagePath: results[0].dataValues.imagepath,
-            });
-        })
-        .catch(err => {
-            res.status(500).json({
-                error: err,
             });
         });
     /*
@@ -214,14 +214,13 @@ router.delete('/:id', checkAuth, (req, res, next) => {
             id: req.params.id,
         },
     })
-        .then(results => {
-            console.log(result);
-            res.status(200).json({ message: 'Post deleted' });
-        })
         .catch(err => {
             res.status(500).json({
                 error: err,
             });
+        })
+        .then(results => {
+            res.status(200).json({ message: 'Post deleted' });
         });
     /*
     Post.query(
