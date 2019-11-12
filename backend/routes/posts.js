@@ -104,6 +104,7 @@ router.put(
                 title: req.body.title,
                 content: req.body.content,
                 imagepath: imagePath,
+                user_id: req.userData.userId,
             },
             {
                 where: {
@@ -163,7 +164,7 @@ router.get('', (req, res, next) => {
 
 router.get('', (req, res, next) => {
     Post.findAll({
-        attributes: ['id', 'title', 'content', 'imagepath'],
+        attributes: ['id', 'title', 'content', 'imagepath', 'user_id'],
     })
         .catch(err => {
             res.status(500).json({
@@ -232,7 +233,6 @@ router.delete('/:id', checkAuth, (req, res, next) => {
             });
         })
         .then(result => {
-            console.log(result);
             if (result > 0) {
                 res.status(200).json({
                     message: 'Post Deleted!',

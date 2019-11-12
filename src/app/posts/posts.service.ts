@@ -26,6 +26,7 @@ export class PostsService {
                             content: post.content,
                             id: post.id,
                             imagePath: post.imagepath,
+                            user_id: post.user_id,
                         };
                     });
                 })
@@ -46,6 +47,7 @@ export class PostsService {
             title: string;
             content: string;
             imagePath: string;
+            user_id: string;
         }>('http://localhost:3000/api/posts/' + id);
     }
 
@@ -65,6 +67,7 @@ export class PostsService {
                     title: title,
                     content: content,
                     imagePath: responseData.post.imagePath,
+                    user_id: responseData.post.user_id,
                 };
                 this.posts.push(post);
                 this.postsUpdated.next([...this.posts]);
@@ -76,7 +79,8 @@ export class PostsService {
         id: string,
         title: string,
         content: string,
-        image: File | string
+        image: File | string,
+        user_id: string
     ) {
         let postData: Post | FormData;
         if (typeof image === 'object') {
@@ -91,6 +95,7 @@ export class PostsService {
                 title: title,
                 content: content,
                 imagePath: image,
+                user_id: null,
             };
         }
         this.http
@@ -103,6 +108,7 @@ export class PostsService {
                     title: title,
                     content: content,
                     imagePath: '',
+                    user_id: user_id,
                 };
                 updatedPosts[oldPostIndex] = post;
                 this.posts = updatedPosts;

@@ -53,6 +53,7 @@ router.post('/login', (req, res, next) => {
                 res.status(200).json({
                     token: token,
                     expiresIn: 3600,
+                    userId: grabbedUser.dataValues.user_id,
                 });
             })
             .catch(err => {
