@@ -5,7 +5,7 @@ const bodyParser = require('body-parser');
 const postRoutes = require('./routes/posts');
 const player_infoRoutes = require('./routes/player_info');
 const statRoutes = require('./routes/stats');
-const userRoutes = require('./routes/user');
+const userRoutesasdad = require('./routes/user');
 
 const app = express();
 const Sequelize = require('sequelize');
