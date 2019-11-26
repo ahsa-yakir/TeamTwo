@@ -41,6 +41,7 @@ router.post(
             title: req.body.title,
             content: req.body.content,
             imagepath: url + '/images/' + req.file.filename,
+            user_id: req.userData.userId,
         })
             .catch(err => {
                 res.status(500).json({
@@ -84,6 +85,7 @@ router.post(
 //Update Post
 router.put(
     '/:id',
+    checkAuth,
     multer({ storage: storage }).single('image'),
     (req, res, next) => {
         let imagePath = req.body.imagepath;
@@ -96,10 +98,12 @@ router.put(
                 title: req.body.title,
                 content: req.body.content,
                 imagepath: imagePath,
+                user_id: req.userData.userId,
             },
             {
                 where: {
                     id: req.body.id,
+                    user_id: req.userData.userId,
                 },
             }
         )
@@ -109,9 +113,15 @@ router.put(
                 });
             })
             .then(result => {
-                res.status(200).json({
-                    message: 'Post updated successfully',
-                });
+                if (result[0] > 0) {
+                    res.status(200).json({
+                        message: 'Post updated successfully',
+                    });
+                } else {
+                    res.status(401).json({
+                        message: 'Not Authorized!',
+                    });
+                }
             });
         /*
         Post.query(
@@ -148,7 +158,7 @@ router.get('', (req, res, next) => {
 
 router.get('', (req, res, next) => {
     Post.findAll({
-        attributes: ['id', 'title', 'content', 'imagepath'],
+        attributes: ['id', 'title', 'content', 'imagepath', 'user_id'],
     })
         .catch(err => {
             res.status(500).json({
@@ -180,6 +190,7 @@ router.get('/:id', (req, res, next) => {
                 title: results[0].dataValues.title,
                 content: results[0].dataValues.content,
                 imagePath: results[0].dataValues.imagepath,
+                user_id: results[0].dataValues.user_id,
             });
         });
     /*
@@ -207,6 +218,7 @@ router.delete('/:id', checkAuth, (req, res, next) => {
     Post.destroy({
         where: {
             id: req.params.id,
+            user_id: req.userData.userId,
         },
     })
         .catch(err => {
@@ -214,8 +226,16 @@ router.delete('/:id', checkAuth, (req, res, next) => {
                 error: err,
             });
         })
-        .then(results => {
-            res.status(200).json({ message: 'Post deleted' });
+        .then(result => {
+            if (result > 0) {
+                res.status(200).json({
+                    message: 'Post Deleted!',
+                });
+            } else {
+                res.status(401).json({
+                    message: 'Not Authorized!',
+                });
+            }
         });
     /*
     Post.query(
