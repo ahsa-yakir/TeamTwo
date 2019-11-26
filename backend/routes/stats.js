@@ -15,12 +15,8 @@ router.get('/:user_id', (req, res, next) => {
             });
         })
         .then(results => {
-            res.status(200).json({
-                goals: results[0].dataValues.goals,
-                assists: results[0].dataValues.assists,
-                games_played: results[0].dataValues.games_played,
-                user_id: results[0].dataValues.user_id,
-            });
+            console.log(results);
+            res.status(200).json(results[0].dataValues);
         });
 });
 
@@ -28,17 +24,17 @@ router.get('', (req, res, next) => {
     Stat.findAll({
         attributes: ['goals', 'assists', 'games_played', 'user_id'],
     })
-         .catch(err => {
-             res.status(500).json({
-                 error: err,
-             });
+        .catch(err => {
+            res.status(500).json({
+                error: err,
+            });
         })
-         .then(result => {
-             res.status(201).json({
+        .then(result => {
+            res.status(201).json({
                 message: 'Stats fetched successfully',
                 stats: result,
-             });
-         });
+            });
+        });
 });
 
 module.exports = router;

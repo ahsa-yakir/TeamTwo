@@ -50,12 +50,7 @@ router.post(
             .then(results => {
                 res.status(201).json({
                     message: 'Post Created!',
-                    post: {
-                        id: results.dataValues.id,
-                        title: results.dataValues.title,
-                        content: results.dataValues.content,
-                        imagePath: results.dataValues.imagepath,
-                    },
+                    post: results.dataValues,
                 });
             });
         /*
