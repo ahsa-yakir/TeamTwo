@@ -21,9 +21,8 @@ describe('Users Route', function() {
             where: {
                 email: newUserTest.email,
             },
-        });
-        User.findOne({ where: { email: newUserTest.email } }).then(res => {
-            expect(res).to.equal(null);
+        }).then(res => {
+            expect(res).to.equal(1);
             done();
         });
     });
