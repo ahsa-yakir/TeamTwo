@@ -1,4 +1,4 @@
-export interface createProfile {
+export interface Profile {
     firstName: string;
     lastName: string;
     birthdate: Date;
@@ -6,5 +6,8 @@ export interface createProfile {
     city: string;
     state: string;
     country: string;
+    goals: number;
+    assists: number;
+    gamesPlayed: number;
     user_id: string;
 }

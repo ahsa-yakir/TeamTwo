@@ -1,5 +1,5 @@
 <mat-card>
-    <form [formGroup]="form" (submit)="onSubmitProfile()" ]>
+    <form [formGroup]="createProfileForm" (submit)="onSubmitProfile()">
         <mat-form-field>
             <input
                 matInput
@@ -21,20 +21,14 @@
                 matInput
                 [matDatepicker]="birthdate"
                 placeholder="Birthdate"
+                type="date"
+                required
             />
             <mat-datepicker-toggle
                 matSuffix
                 [for]="birthdate"
             ></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
-        </mat-form-field>
-        <mat-form-field>
-            <input
-                matInput
-                type="text"
-                formControlName="highSchool"
-                placeholder="High School"
-            />
         </mat-form-field>
         <mat-form-field>
             <input
