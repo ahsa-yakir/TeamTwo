@@ -46,6 +46,7 @@ router.get('/:user_id', (req, res, next) => {
             });
         })
         .then(results => {
+            console.log(results);
             // noinspection JSUnresolvedVariable
             res.status(200).json(results[0].dataValues);
         });

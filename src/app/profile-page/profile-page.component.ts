@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ProfilePageService } from './profile-page.service';
 
 @Component({
@@ -7,10 +7,14 @@ import { ProfilePageService } from './profile-page.service';
     styleUrls: ['./profile-page.component.scss'],
 })
 export class ProfilePageComponent implements OnInit {
+    @Input() playerId = 53; //default player id = 53
+    profileData: {};
+
     constructor(private profPageService: ProfilePageService) {}
 
     ngOnInit() {
-        this.profPageService.getProfileData().subscribe(res => {
+        this.profPageService.getProfileData(this.playerId).subscribe(res => {
+            this.profileData = res;
             console.log(res);
         });
     }

@@ -3,9 +3,9 @@
         Soccer Stats
     </mat-card-title>
     <mat-card-content>
-        <div class="stat-display-div" *ngFor="let f of fakeData">
+        <div class="stat-display-div" *ngFor="let s of sportsStats">
             <!--suppress TypeScriptUnresolvedVariable -->
-            <app-stat-display [statTitle]="f.title" [statValue]="f.value">
+            <app-stat-display [statTitle]="s.title" [statValue]="s.value">
             </app-stat-display>
         </div>
     </mat-card-content>
@@ -16,9 +16,9 @@
         Academic Stats
     </mat-card-title>
     <mat-card-content>
-        <div class="stat-display-div" *ngFor="let f of fakeAcademicData">
+        <div class="stat-display-div" *ngFor="let s of academicStats">
             <!--suppress TypeScriptUnresolvedVariable -->
-            <app-stat-display [statTitle]="f.title" [statValue]="f.value">
+            <app-stat-display [statTitle]="s.title" [statValue]="s.value">
             </app-stat-display>
         </div>
     </mat-card-content>
