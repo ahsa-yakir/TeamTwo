@@ -19,6 +19,7 @@ const routes: Routes = [
         component: PostCreateComponent,
         canActivate: [AuthGuard],
     },
+    // { path: 'create-profile', component: ProfileCreateComponent },
     { path: 'login', component: LoginComponent },
     { path: 'signup', component: SignupComponent },
 ];
