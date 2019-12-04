@@ -37,6 +37,12 @@ router.post(
     checkAuth,
     (req, res, next) => {
         const url = req.protocol + '://' + req.get('host');
+        if (req.file === undefined) {
+            req.file = {
+                filename: '/default.png',
+            };
+        }
+
         Post.create({
             title: req.body.title,
             content: req.body.content,
