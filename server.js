@@ -43,6 +43,7 @@ const onListening = () => {
     debug('Listening on ' + bind);
 };
 
+console.log('hello world');
 const port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 

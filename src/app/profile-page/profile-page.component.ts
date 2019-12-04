@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { ProfilePageService } from './profile-page.service';
+import { ActivatedRoute, ParamMap } from '@angular/router';
+import { PostsService } from '../posts/posts.service';
 
 @Component({
     selector: 'app-profile-page',
@@ -6,7 +9,24 @@ import { Component, OnInit } from '@angular/core';
     styleUrls: ['./profile-page.component.scss'],
 })
 export class ProfilePageComponent implements OnInit {
-    constructor() {}
+    @Input() playerId = 53; //default player id = 53
+    profileData: {};
+    statsData: {};
+    userId;
+    constructor(
+        private profPageService: ProfilePageService,
+        public route: ActivatedRoute
+    ) {}
 
-    ngOnInit() {}
+    ngOnInit() {
+        this.route.paramMap.subscribe((paramMap: ParamMap) => {
+            this.userId = paramMap.get('userId');
+        });
+
+        this.profPageService.getProfileData(this.userId).subscribe(res => {
+            this.profileData = res[0];
+            console.log(res[0]);
+            this.statsData = Object.entries(res[1]);
+        });
+    }
 }

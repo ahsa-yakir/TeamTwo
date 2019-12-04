@@ -10,6 +10,8 @@ import {
     MatToolbarModule,
     MatExpansionModule,
     MatProgressSpinnerModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
 } from '@angular/material';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -25,6 +27,7 @@ import { ProfileStatsPaneComponent } from './profile-page/profile-stats-pane/pro
 import { ProfileVideoCarouselComponent } from './profile-page/profile-video-carousel/profile-video-carousel.component';
 import { ProfileHeaderComponent } from './profile-page/profile-header/profile-header.component';
 import { StatDisplayComponent } from './profile-page/profile-stats-pane/stat-display/stat-display.component';
+import { ProfileCreateComponent } from './profiles/create-profile/create-profile.component';
 
 @NgModule({
     declarations: [
@@ -39,6 +42,7 @@ import { StatDisplayComponent } from './profile-page/profile-stats-pane/stat-dis
         ProfileVideoCarouselComponent,
         ProfileHeaderComponent,
         StatDisplayComponent,
+        ProfileCreateComponent,
     ],
     imports: [
         BrowserModule,
@@ -48,6 +52,8 @@ import { StatDisplayComponent } from './profile-page/profile-stats-pane/stat-dis
         BrowserAnimationsModule,
         MatInputModule,
         MatCardModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
         MatButtonModule,
         MatToolbarModule,
         MatExpansionModule,

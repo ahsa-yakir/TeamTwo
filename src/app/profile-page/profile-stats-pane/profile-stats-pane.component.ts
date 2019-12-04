@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
     selector: 'app-profile-stats-pane',
@@ -37,6 +37,9 @@ export class ProfileStatsPaneComponent implements OnInit {
             value: '1 / 600',
         },
     ];
+
+    @Input() sportsStats;
+    @Input() academicStats;
 
     constructor() {}
 

@@ -1,33 +1,36 @@
-<mat-card>
-    <div class="player-image">
-        <!--suppress HtmlUnknownTarget -->
-        <img src="assets/example.jpg" alt="" />
-    </div>
-    <div class="player-info">
-        <h1>
-            Timmy
-        </h1>
-        <h3>
-            Idaho City, ID
-        </h3>
-        <br />
-        <p>
-            School
-        </p>
-        <h3>
-            The Harker School
-        </h3>
-        <h4>
-            Class of 2025
-        </h4>
+<div *ngIf="headerData">
+    <mat-card>
+        <div class="player-image">
+            <!--suppress HtmlUnknownTarget -->
+            <img src="assets/example.jpg" alt="" />
+        </div>
+        <div class="player-info">
+            <h1>
+                {{ headerData.name }}
+            </h1>
+            <h3>
+                {{ headerData.city }}, {{ headerData.state }},
+                {{ headerData.country }}
+            </h3>
+            <br />
 
-        <br />
+            <p>
+                Birthday
+            </p>
+            <h3>
+                {{ headerData.birthdate }}
+            </h3>
 
-        <p>
-            Club
-        </p>
-        <h3>
-            De Anza Force Soccer Club
-        </h3>
-    </div>
-</mat-card>
+            <br />
+
+            <p>
+                School
+            </p>
+            <h3>
+                {{ headerData.high_school }}
+            </h3>
+
+            <br />
+        </div>
+    </mat-card>
+</div>
