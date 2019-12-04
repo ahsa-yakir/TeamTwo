@@ -3,11 +3,28 @@
         <mat-expansion-panel-header>
             {{ post.title }}
         </mat-expansion-panel-header>
+        <button
+            *ngIf="userIsAuthenticated"
+            mat-button
+            color="primary"
+            (click)="viewProfile(post.user_id)"
+            style="float: right;"
+        >
+            View Profile
+        </button>
+
         <div class="post-image">
             <img [src]="post.imagePath" [alt]="post.title" />
         </div>
         <p>{{ post.content }}</p>
+
         <mat-action-row *ngIf="userIsAuthenticated && userId == post.user_id">
+            <a
+                mat-button
+                color="primary"
+                [routerLink]="['/profile/', post.user_id]"
+                >Creator's Profile</a
+            >
             <a mat-button color="primary" [routerLink]="['/edit', post.id]"
                 >EDIT</a
             >
