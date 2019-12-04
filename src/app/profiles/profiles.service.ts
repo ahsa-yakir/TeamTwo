@@ -33,7 +33,7 @@ export class ProfilesService {
         const postData = new FormData();
         postData.append('firstName', firstName);
         postData.append('lastName', lastName);
-        postData.append('birthDate', birthdate.toString());
+        postData.append('birthdate', birthdate.toString());
         postData.append('highSchool', highSchool);
         postData.append('city', city);
         postData.append('state', state);
@@ -44,19 +44,19 @@ export class ProfilesService {
                 postData
             )
             .subscribe(responseData => {
-                const profile: Profile = {
-                    firstName: firstName,
-                    lastName: lastName,
-                    birthdate: birthdate,
-                    highSchool: highSchool,
-                    city: city,
-                    state: state,
-                    country: country,
-                    goals: null,
-                    assists: null,
-                    gamesPlayed: null,
-                    user_id: responseData.profile.user_id,
-                };
+                // const profile: Profile = {
+                //     firstName: firstName,
+                //     lastName: lastName,
+                //     birthdate: birthdate,
+                //     highSchool: highSchool,
+                //     city: city,
+                //     state: state,
+                //     country: country,
+                //     goals: null,
+                //     assists: null,
+                //     gamesPlayed: null,
+                //     userId: responseData.profile.user_id,
+                // };
                 // this.router.navigate(['/']);
             });
     }

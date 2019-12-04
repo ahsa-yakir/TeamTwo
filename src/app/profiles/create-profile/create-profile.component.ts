@@ -52,7 +52,7 @@ export class ProfileCreateComponent implements OnInit {
         this.profilesService.createProfile(
             form.value.firstName,
             form.value.lastName,
-            form.value.birthDate,
+            form.value.birthdate,
             form.value.highSchool,
             form.value.city,
             form.value.state,
