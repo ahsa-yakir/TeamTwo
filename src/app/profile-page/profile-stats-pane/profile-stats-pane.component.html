@@ -3,22 +3,12 @@
         Soccer Stats
     </mat-card-title>
     <mat-card-content>
-        <div class="stat-display-div" *ngFor="let s of sportsStats">
+        <div
+            class="stat-display-div"
+            *ngFor="let s of sportsStats | slice: 0:3"
+        >
             <!--suppress TypeScriptUnresolvedVariable -->
-            <app-stat-display [statTitle]="s.title" [statValue]="s.value">
-            </app-stat-display>
-        </div>
-    </mat-card-content>
-</mat-card>
-
-<mat-card>
-    <mat-card-title>
-        Academic Stats
-    </mat-card-title>
-    <mat-card-content>
-        <div class="stat-display-div" *ngFor="let s of academicStats">
-            <!--suppress TypeScriptUnresolvedVariable -->
-            <app-stat-display [statTitle]="s.title" [statValue]="s.value">
+            <app-stat-display [statTitle]="s[0]" [statValue]="s[1]">
             </app-stat-display>
         </div>
     </mat-card-content>
