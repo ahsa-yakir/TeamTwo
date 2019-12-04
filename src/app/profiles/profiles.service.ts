@@ -47,4 +47,19 @@ export class ProfilesService {
                 this.router.navigate(['/']);
             });
     }
+
+    createStats(goals: Number, assists: Number, gamesPlayed: Number) {
+        const postData = new FormData();
+        postData.append('goals', goals.toString());
+        postData.append('assists', assists.toString());
+        postData.append('gamesPlayed', gamesPlayed.toString());
+        this.http
+            .post<{ message: string; profile: Profile }>(
+                'http://localhost:3000/api/stats',
+                postData
+            )
+            .subscribe(responseData => {
+                this.router.navigate(['/']);
+            });
+    }
 }

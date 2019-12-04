@@ -45,7 +45,6 @@ export class ProfileCreateComponent implements OnInit {
     onImagePicked(event: Event) {}
 
     onSubmitProfile(form: NgForm) {
-        console.log(form.value);
         if (form.invalid) {
             return;
         }
@@ -57,6 +56,11 @@ export class ProfileCreateComponent implements OnInit {
             form.value.city,
             form.value.state,
             form.value.country
+        );
+        this.profilesService.createStats(
+            form.value.goals,
+            form.value.assists,
+            form.value.gamesPlayed
         );
     }
 }
