@@ -44,20 +44,7 @@ export class ProfilesService {
                 postData
             )
             .subscribe(responseData => {
-                // const profile: Profile = {
-                //     firstName: firstName,
-                //     lastName: lastName,
-                //     birthdate: birthdate,
-                //     highSchool: highSchool,
-                //     city: city,
-                //     state: state,
-                //     country: country,
-                //     goals: null,
-                //     assists: null,
-                //     gamesPlayed: null,
-                //     userId: responseData.profile.user_id,
-                // };
-                // this.router.navigate(['/']);
+                this.router.navigate(['/']);
             });
     }
 }
