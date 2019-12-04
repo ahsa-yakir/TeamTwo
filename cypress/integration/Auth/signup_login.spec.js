@@ -66,7 +66,7 @@ describe('Test Signup', function() {
             cy.wait('@postAccount').then(xhr => {
                 expect(xhr.status).to.be.equal(201);
             });
-            cy.url().should('be', 'http://localhost:4200/');
+            cy.url().should('be', 'http://localhost:4200/create-profile');
         });
 
         it('checks header buttons changed', function() {
