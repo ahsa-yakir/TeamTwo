@@ -6,6 +6,7 @@ import { PostCreateComponent } from './posts/post-create/post-create.component';
 import { LoginComponent } from './auth/login/login.component';
 import { SignupComponent } from './auth/signup/signup.component';
 import { AuthGuard } from './auth/auth-guard';
+import { ProfileCreateComponent } from './profiles/create-profile/create-profile.component';
 import { ProfilePageComponent } from './profile-page/profile-page.component';
 
 const routes: Routes = [
@@ -13,6 +14,11 @@ const routes: Routes = [
     {
         path: 'create',
         component: PostCreateComponent,
+        canActivate: [AuthGuard],
+    },
+    {
+        path: 'create-profile',
+        component: ProfileCreateComponent,
         canActivate: [AuthGuard],
     },
     {

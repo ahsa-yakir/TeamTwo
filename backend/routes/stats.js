@@ -5,10 +5,10 @@ const multer = require('multer');
 const getFields = multer();
 const checkAuth = require('../middleware/check-auth');
 
-const Stat = models.stats;
+const Stats = models.stats;
 
 router.get('/:user_id', (req, res, next) => {
-    Stat.findAll({
+    Stats.findAll({
         where: {
             user_id: req.params.user_id,
         },
@@ -29,7 +29,7 @@ router.get('/:user_id', (req, res, next) => {
 });
 
 router.get('', (req, res, next) => {
-    Stat.findAll({
+    Stats.findAll({
         attributes: ['goals', 'assists', 'games_played', 'user_id'],
     })
         .catch(err => {
@@ -46,7 +46,7 @@ router.get('', (req, res, next) => {
 });
 
 router.post(
-    '/:add',
+    '/',
     getFields.any(),
     checkAuth,
     ///:add added for testing
@@ -54,8 +54,8 @@ router.post(
         Stats.create({
             goals: req.body.goals,
             assists: req.body.assists,
-            games_played: req.body.games_played,
-            user_id: req.userData.user_id,
+            games_played: req.body.gamesPlayed,
+            user_id: req.userData.userId,
         })
             .catch(err => {
                 res.status(500).json({
@@ -65,12 +65,7 @@ router.post(
             .then(results => {
                 res.status(201).json({
                     message: 'Stats Added!',
-                    stats: {
-                        goals: results.dataValues.goals,
-                        assists: results.dataValues.assists,
-                        games_played: results.dataValues.games_played,
-                        user_id: results.dataValues.user_id,
-                    },
+                    results: results,
                 });
             });
     }

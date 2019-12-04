@@ -53,18 +53,18 @@ router.get('/:user_id', (req, res, next) => {
 });
 
 router.post(
-    '/:add',
+    '/',
     getFields.any(),
     checkAuth,
     ///:add added for testing purposes
     (req, res, next) => {
         Player_info.create({
-            user_id: req.userData.user_id,
-            name: req.body.name,
-            last_login: req.body.last_login,
+            user_id: req.userData.userId,
+            name: req.body.firstName + ' ' + req.body.lastName,
+            last_login: null,
             birthdate: req.body.birthdate,
-            high_school: req.body.high_school,
-            profile_picture: req.body.profile_picture,
+            high_school: req.body.highSchool,
+            profile_picture: null,
             city: req.body.city,
             state: req.body.state,
             country: req.body.country,
@@ -77,17 +77,7 @@ router.post(
             .then(results => {
                 res.status(201).json({
                     message: 'Player Info Added!',
-                    player_info: {
-                        user_id: results.dataValues.user_id,
-                        name: results.dataValues.name,
-                        last_login: results.dataValues.last_login,
-                        birthdate: results.dataValues.birthdate,
-                        high_school: results.dataValues.high_school,
-                        profile_picture: results.dataValues.profile_picture,
-                        city: results.dataValues.city,
-                        state: results.dataValues.state,
-                        country: results.dataValues.country,
-                    },
+                    results: results,
                 });
             });
     }
