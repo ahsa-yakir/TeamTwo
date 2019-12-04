@@ -24,15 +24,6 @@ export class ProfileCreateComponent implements OnInit {
     ) {}
 
     ngOnInit() {
-        // this.createProfileForm = new FormGroup({
-        //     firstName: new FormControl(),
-        //     lastName: new FormControl(),
-        //     birthDate: new FormControl(),
-        //     highSchool: new FormControl(),
-        //     state: new FormControl(),
-        //     city: new FormControl(),
-        //     country: new FormControl(),
-        // });
         this.userIsAuthenticated = this.authService.getIsAuth();
         this.authStatusSub = this.authService
             .getAuthStatusListener()

@@ -10,17 +10,6 @@ import { Profile } from './profiles.model';
 export class ProfilesService {
     constructor(private http: HttpClient, private router: Router) {}
 
-    // Get one profile
-    getProfile(id: string) {
-        return this.http.get<{
-            id: string;
-            title: string;
-            content: string;
-            imagePath: string;
-            user_id: string;
-        }>('http://localhost:3000/api/posts/' + id);
-    }
-
     createProfile(
         firstName: string,
         lastName: string,
