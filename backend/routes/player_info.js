@@ -61,18 +61,18 @@ router.get('/:user_id', (req, res, next) => {
 });
 
 router.post(
-    '/:add',
+    '/',
     getFields.any(),
     checkAuth,
     ///:add added for testing purposes
     (req, res, next) => {
         Player_info.create({
             user_id: req.userData.user_id,
-            name: req.body.name,
-            last_login: req.body.last_login,
+            name: req.body.firstName + ' ' + req.body.lastName,
+            last_login: null,
             birthdate: req.body.birthdate,
             high_school: req.body.high_school,
-            profile_picture: req.body.profile_picture,
+            profile_picture: null,
             city: req.body.city,
             state: req.body.state,
             country: req.body.country,

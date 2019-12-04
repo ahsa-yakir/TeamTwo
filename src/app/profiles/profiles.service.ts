@@ -21,26 +21,42 @@ export class ProfilesService {
         }>('http://localhost:3000/api/posts/' + id);
     }
 
-    createProfile(title: string, content: string, image: File) {
+    createProfile(
+        firstName: string,
+        lastName: string,
+        birthdate: Date,
+        highSchool: string,
+        city: string,
+        state: string,
+        country: string
+    ) {
         const postData = new FormData();
-        postData.append('title', title);
-        postData.append('content', content);
-        postData.append('image', image, title);
+        postData.append('firstName', firstName);
+        postData.append('lastName', lastName);
+        postData.append('birthDate', birthdate.toString());
+        postData.append('highSchool', highSchool);
+        postData.append('city', city);
+        postData.append('state', state);
+        postData.append('country', country);
         this.http
             .post<{ message: string; profile: Profile }>(
-                'http://localhost:3000/api/posts',
+                'http://localhost:3000/api/player_info',
                 postData
             )
             .subscribe(responseData => {
-                // UPDATE THE VALUES BELOW TO BE WHAT A PROFILE NEEDS
-                // const profile: Profile = {
-                //     id: responseData.post.id,
-                //     title: title,
-                //     content: content,
-                //     imagePath: responseData.post.imagePath,
-                //     user_id: responseData.post.user_id,
-                // };
-                // this.posts.push(post);
+                const profile: Profile = {
+                    firstName: firstName,
+                    lastName: lastName,
+                    birthdate: birthdate,
+                    highSchool: highSchool,
+                    city: city,
+                    state: state,
+                    country: country,
+                    goals: null,
+                    assists: null,
+                    gamesPlayed: null,
+                    user_id: responseData.profile.user_id,
+                };
                 // this.router.navigate(['/']);
             });
     }

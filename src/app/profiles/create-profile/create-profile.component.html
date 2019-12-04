@@ -1,84 +1,77 @@
 <mat-card>
-    <form [formGroup]="createProfileForm" (submit)="onSubmitProfile()">
+    <form (submit)="onSubmitProfile(profileForm)" #profileForm="ngForm">
         <mat-form-field>
             <input
                 matInput
+                name="firstName"
+                ngModel
                 type="text"
-                formControlName="firstName"
                 placeholder="First Name"
-            />
-        </mat-form-field>
-        <mat-form-field>
-            <input
-                matInput
-                type="text"
-                formControlName="lastName"
-                placeholder="Last Name"
-            />
-        </mat-form-field>
-        <mat-form-field>
-            <input
-                matInput
-                [matDatepicker]="birthdate"
-                placeholder="Birthdate"
-                type="date"
                 required
             />
-            <mat-datepicker-toggle
-                matSuffix
-                [for]="birthdate"
-            ></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
         <mat-form-field>
             <input
                 matInput
+                name="lastName"
+                ngModel
                 type="text"
-                formControlName="highSchool"
+                placeholder="Last Name"
+                required
+            />
+        </mat-form-field>
+        <mat-form-field>
+            <input
+                matInput
+                name="birthDate"
+                ngModel
+                type="date"
+                placeholder="Birthdate"
+                required
+            />
+        </mat-form-field>
+        <mat-form-field>
+            <input
+                matInput
+                name="highSchool"
+                ngModel
+                type="text"
                 placeholder="High School"
+                required
             />
         </mat-form-field>
         <mat-form-field>
             <input
                 matInput
+                name="city"
+                ngModel
                 type="text"
-                formControlName="city"
                 placeholder="City"
+                required
             />
         </mat-form-field>
         <mat-form-field>
             <input
                 matInput
+                name="state"
+                ngModel
                 type="text"
-                formControlName="state"
                 placeholder="State"
+                required
             />
         </mat-form-field>
         <mat-form-field>
             <input
                 matInput
+                name="country"
+                ngModel
                 type="text"
-                formControlName="country"
                 placeholder="Country"
+                required
             />
         </mat-form-field>
-        <div>
-            <button
-                mat-stroked-button
-                type="button"
-                (click)="filePicker.click()"
-            >
-                Pick Profile Picture
-            </button>
-            <input type="file" #filePicker (change)="onImagePicked($event)" />
-        </div>
-        <div
-            class="image-preview"
-            *ngIf="
-                imagePreview !== '' && imagePreview && form.get('image').valid
-            "
-        >
-            <img [src]="imagePreview" [alt]="form.value.title" />
-        </div>
+        <button mat-raised-button color="accent" type="submit">
+            Create
+        </button>
     </form>
 </mat-card>
