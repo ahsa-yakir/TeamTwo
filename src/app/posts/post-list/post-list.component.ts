@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 import { Post } from '../post.model';
 import { PostsService } from '../posts.service';
 import { AuthService } from '../../auth/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-post-list',
@@ -23,7 +24,8 @@ export class PostListComponent implements OnInit, OnDestroy {
     userId: string;
     constructor(
         public postsService: PostsService,
-        private authService: AuthService
+        private authService: AuthService,
+        private router: Router
     ) {}
 
     ngOnInit() {
@@ -45,6 +47,10 @@ export class PostListComponent implements OnInit, OnDestroy {
 
     onDelete(postID: string) {
         this.postsService.deletePost(postID);
+    }
+
+    viewProfile(usId: string) {
+        this.router.navigate(['/profile/' + usId]);
     }
 
     ngOnDestroy() {

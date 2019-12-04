@@ -1,3 +1,9 @@
-<app-profile-header class="profile-section"></app-profile-header>
-<app-profile-stats-pane class="profile-section"></app-profile-stats-pane>
+<app-profile-header
+    class="profile-section"
+    [headerData]="profileData"
+></app-profile-header>
+<app-profile-stats-pane
+    class="profile-section"
+    [sportsStats]="statsData"
+></app-profile-stats-pane>
 <!--<app-profile-video-carousel class="profile-section"></app-profile-video-carousel>-->
