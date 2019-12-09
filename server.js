@@ -43,7 +43,7 @@ const onListening = () => {
     debug('Listening on ' + bind);
 };
 
-console.log('hello world');
+console.log('UScout Server Initialized!');
 const port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 
